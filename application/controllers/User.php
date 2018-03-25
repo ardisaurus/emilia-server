@@ -48,6 +48,8 @@ class User extends REST_Controller {
         }elseif ($action=="auth") {
             $email = $this->post('email');
             $password = $this->post('password');
+            $this->db->select('email');
+            $this->db->select('password');
             $this->db->where('email', $email);
             $user = $this->db->get('user')->result();
             if ($user[0]->password==$password ) {

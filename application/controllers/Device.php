@@ -18,10 +18,7 @@ class Device extends REST_Controller {
         } else {
             $device = $this->db->query("SELECT `dvc_status` FROM `device` where `device`.`dvc_id`='$dvc_id'")->result();
         }
-        $this->response($device, 200);
-        // $data[0] = array('dvc_status' => 1);
-        // $this->response($data, 200);
-    }
+        $this->response($device, 200);    }
 
     function index_post() {
         $this->response(array('status' => 'fail', 502));

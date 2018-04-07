@@ -76,6 +76,7 @@ class Memberdeviceman extends REST_Controller {
                 $this->response($data, 200);
             }
         }elseif ($action=="unlock") {
+            $email = $this->post('email');
             $dvc_id = $this->post('dvc_id');
             $dvc_password = $this->post('dvc_password');
             if ($dvc_password!='') {
@@ -88,7 +89,16 @@ class Memberdeviceman extends REST_Controller {
                     $this->db->where('dvc_id', $dvc_id);
                     $update = $this->db->update('device', $data);
                     if ($update) {
-                        $this->response($data, 200);
+                        $data2 = array( 'hst_email' => $email,
+                                        'hst_date' => date("Y-m-d"),
+                                        'hst_time' => date("h:i:s"),
+                                        'hst_dvc_id' => $dvc_id);
+                        $update2 = $this->db->insert('history', $data2);
+                        if ($update2) {
+                            $this->response($data2, 200);
+                        } else {
+                            $this->response(array('status' => 'fail', 502));
+                        }
                     } else {
                         $this->response(array('status' => 'fail', 502));
                     }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 07, 2018 at 06:29 PM
+-- Generation Time: Apr 08, 2018 at 12:37 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 5.6.33
 
@@ -41,7 +41,7 @@ CREATE TABLE `device` (
 --
 
 INSERT INTO `device` (`dvc_id`, `dvc_name`, `dvc_password`, `dvc_password_sc`, `dvc_status`) VALUES
-('bk803', '', '0192023a7bbd73250516f069df18b500', '', 0),
+('bk803', '', '0192023a7bbd73250516f069df18b500', '0192023a7bbd73250516f069df18b500', 0),
 ('go956', '', '0192023a7bbd73250516f069df18b500', '', 0),
 ('ue025', 'Front door', '0192023a7bbd73250516f069df18b500', '', 0);
 
@@ -78,7 +78,7 @@ CREATE TABLE `ownership` (
   `own_id` int(11) NOT NULL,
   `own_email` varchar(100) NOT NULL,
   `own_dvc_id` varchar(60) NOT NULL,
-  `own_level` int(11) NOT NULL
+  `own_level` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --

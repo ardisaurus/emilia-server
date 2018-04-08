@@ -14,12 +14,21 @@ class Memberdeviceman extends REST_Controller {
     function index_get() {
         $own_email = $this->get('email');
         $dvc_id = $this->get('dvc_id');
-        if ($own_email != '') { 
-            if ($dvc_id == '') {  
-                $device = $this->db->query("SELECT `dvc_id`,`dvc_status`,`dvc_name`,`ownership`.`own_email` as `email` FROM `device` inner JOIN `ownership` ON `device`.`dvc_id`=`ownership`.`own_dvc_id` WHERE `ownership`.`own_email`= '$own_email'")->result();                
+        $level = $this->get('level');
+        if ($own_email != '') {
+            if ($level == 1) {  
+                if ($dvc_id == '') {  
+                    $device = $this->db->query("SELECT `dvc_id`,`dvc_status`,`dvc_name`,`ownership`.`own_email` as `email` FROM `device` inner JOIN `ownership` ON `device`.`dvc_id`=`ownership`.`own_dvc_id` WHERE `ownership`.`own_email`= '$own_email' AND `ownership`.`own_level`=1")->result();                
+                } else {
+                    $device = $this->db->query("SELECT `dvc_id`,`dvc_status`,`dvc_name`,`ownership`.`own_email` as `email` FROM `device` inner JOIN `ownership` ON `device`.`dvc_id`=`ownership`.`own_dvc_id` WHERE `device`.`dvc_id`='$dvc_id' AND `ownership`.`own_email`= '$own_email' AND `ownership`.`own_level`=1")->result();
+                }                
             } else {
-                $device = $this->db->query("SELECT `dvc_id`,`dvc_status`,`dvc_name`,`ownership`.`own_email` as `email` FROM `device` inner JOIN `ownership` ON `device`.`dvc_id`=`ownership`.`own_dvc_id` WHERE `device`.`dvc_id`='$dvc_id' AND `ownership`.`own_email`= '$own_email'")->result();
-            }
+                if ($dvc_id == '') {  
+                    $device = $this->db->query("SELECT `dvc_id`,`dvc_status`,`dvc_name`,`ownership`.`own_email` as `email` FROM `device` inner JOIN `ownership` ON `device`.`dvc_id`=`ownership`.`own_dvc_id` WHERE `ownership`.`own_email`= '$own_email' AND `ownership`.`own_level`=0")->result();                
+                } else {
+                    $device = $this->db->query("SELECT `dvc_id`,`dvc_status`,`dvc_name`,`ownership`.`own_email` as `email` FROM `device` inner JOIN `ownership` ON `device`.`dvc_id`=`ownership`.`own_dvc_id` WHERE `device`.`dvc_id`='$dvc_id' AND `ownership`.`own_email`= '$own_email' AND `ownership`.`own_level`=0")->result();
+                }
+            }            
             $this->response($device, 200);
         } else {
             $this->response(array('status' => 'fail', 502));
@@ -145,7 +154,7 @@ class Memberdeviceman extends REST_Controller {
             $this->db->where('own_dvc_id', $dvc_id);
             $delete = $this->db->delete('ownership');
             if ($delete) {
-                $data = array('dvc_name' => '');
+                $data = array('dvc_name' => '', 'dvc_password_sc' => '');
                 $this->db->where('dvc_id', $dvc_id);
                 $update = $this->db->update('device', $data);
                 if ($update) {

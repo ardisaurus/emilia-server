@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 08, 2018 at 12:37 PM
+-- Generation Time: Apr 10, 2018 at 10:59 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 5.6.33
 
@@ -41,7 +41,7 @@ CREATE TABLE `device` (
 --
 
 INSERT INTO `device` (`dvc_id`, `dvc_name`, `dvc_password`, `dvc_password_sc`, `dvc_status`) VALUES
-('bk803', '', '0192023a7bbd73250516f069df18b500', '0192023a7bbd73250516f069df18b500', 0),
+('bk803', '', 'c93ccd78b2076528346216b3b2f701e6', '0192023a7bbd73250516f069df18b500', 0),
 ('go956', '', '0192023a7bbd73250516f069df18b500', '', 0),
 ('ue025', 'Front door', '0192023a7bbd73250516f069df18b500', '', 0);
 
@@ -64,9 +64,15 @@ CREATE TABLE `history` (
 --
 
 INSERT INTO `history` (`hst_id`, `hst_date`, `hst_time`, `hst_dvc_id`, `hst_email`) VALUES
-(1, '2018-04-05', '06:00:00', 'bk803', 'onodera@haru.com'),
 (3, '2018-04-05', '06:00:00', 'bk803', 'onodera@haru.com'),
-(4, '2018-04-07', '05:53:18', 'ue025', 'onodera@haru.com');
+(4, '2018-04-07', '05:53:18', 'ue025', 'onodera@haru.com'),
+(5, '2018-04-08', '05:22:55', 'ue025', 'onodera@haru.com'),
+(6, '2018-04-08', '05:41:35', 'ue025', 'onodera@haru.com'),
+(7, '2018-04-09', '09:00:11', 'bk803', 'ichijo@raku.com'),
+(8, '2018-04-09', '04:38:31', 'bk803', 'ichijo@raku.com'),
+(9, '2018-04-09', '04:39:51', 'bk803', 'ichijo@raku.com'),
+(10, '2018-04-09', '04:40:51', 'bk803', 'ichijo@raku.com'),
+(11, '2018-04-09', '04:48:22', 'bk803', 'onodera@haru.com');
 
 -- --------------------------------------------------------
 
@@ -86,7 +92,9 @@ CREATE TABLE `ownership` (
 --
 
 INSERT INTO `ownership` (`own_id`, `own_email`, `own_dvc_id`, `own_level`) VALUES
-(5, 'onodera@haru.com', 'ue025', 0);
+(5, 'onodera@haru.com', 'ue025', 0),
+(7, 'onodera@haru.com', 'bk803', 0),
+(11, 'onodera@haru.com', 'bk803', 1);
 
 -- --------------------------------------------------------
 
@@ -148,13 +156,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `hst_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `hst_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `ownership`
 --
 ALTER TABLE `ownership`
-  MODIFY `own_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `own_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

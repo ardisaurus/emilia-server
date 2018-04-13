@@ -112,7 +112,33 @@ class Memberdeviceman extends REST_Controller {
                 $data[0] = array('status' => "fail");
                 $this->response($data, 200);
             }
-
+        }elseif ($action=="forgot_password") {
+            // forgot device password with primary access password
+            $email = $this->post('email');
+            $password = $this->post('password');
+            $this->db->select('email');
+            $this->db->select('password');
+            $this->db->where('email', $email);
+            $user = $this->db->get('user')->result();
+            if ($user[0]->password==$password ) {
+                $dvc_id = $this->post('dvc_id');
+                $dvc_password = $this->post('dvc_password');
+                $this->db->select('dvc_id');
+                $this->db->select('dvc_password');
+                $data = array('dvc_password' => $this->post('dvc_password'));
+                $this->db->where('dvc_id', $dvc_id);
+                $update = $this->db->update('device', $data);
+                if ($update) {
+                    $data[0] = array('status' => "success");
+                    $this->response($data, 200);
+                } else {
+                    $data[0] = array('status' => "fail");
+                    $this->response($data, 200);
+                }
+            } else {
+                $data[0] = array('status' => $user[0]->password."nm");
+                $this->response($data, 200);
+            }
         }elseif ($action=="auth_sc") {
             // Authorize user with secondary access password
             $dvc_id = $this->post('dvc_id');
@@ -277,8 +303,14 @@ class Memberdeviceman extends REST_Controller {
                 $this->response(array('status' => 'fail', 502));
             }
         }elseif ($action=="delete") {
-            //delete device from owned device list primary access
+            //delete device from owned device list primary access            
             $dvc_id = $this->post('dvc_id');
+            $device = $this->db->query("SELECT `hst_dvc_id` FROM `history` WHERE `hst_dvc_id`='$dvc_id'")->result();
+            if ($device) {
+                $this->db->where('hst_dvc_id', $dvc_id);
+                $delete = $this->db->delete('history');
+            }
+
             $this->db->where('own_dvc_id', $dvc_id);
             $delete = $this->db->delete('ownership');
             if ($delete) {
@@ -314,6 +346,12 @@ class Memberdeviceman extends REST_Controller {
         }elseif ($action=="delete_sc_key") {
             //delete secondary access key/password
             $dvc_id = $this->post('dvc_id');
+            $device = $this->db->query("SELECT `own_dvc_id`,`own_level` FROM `ownership` WHERE `ownership`.`own_level` = 1 AND `ownership`.`own_dvc_id`='$dvc_id'")->result();
+            if ($device) {
+                $this->db->where('own_dvc_id', $dvc_id);
+                $this->db->where('own_level', 1);
+                $delete = $this->db->delete('ownership');
+            }
             $data = array('dvc_password_sc' => '');
             $this->db->where('dvc_id', $dvc_id);
             $update = $this->db->update('device', $data);

@@ -60,7 +60,27 @@ class User extends REST_Controller {
                 $this->response($data, 200);
             }  
         }elseif ($action=="delete") {
+
             $email = $this->post('email');
+
+            $device = $this->db->query("SELECT `own_dvc_id` FROM `ownership` WHERE `own_email`='$email'")->result();
+            if ($device) {
+                foreach ($device as $devicedata) {
+                    $this->db->where('own_dvc_id', $devicedata->own_dvc_id);
+                    $delete = $this->db->delete('ownership');
+                    if ($delete) {
+                        $data = array('dvc_name' => '', 'dvc_password_sc' => '');
+                        $this->db->where('dvc_id', $devicedata->own_dvc_id);
+                        $update = $this->db->update('device', $data);
+                    }
+                    $device = $this->db->query("SELECT `hst_dvc_id` FROM `history` WHERE `hst_dvc_id`='$devicedata->own_dvc_id'")->result();
+                    if ($device) {
+                        $this->db->where('hst_dvc_id', $devicedata->own_dvc_id);
+                        $delete = $this->db->delete('history');
+                    }
+                }
+            }
+
             $this->db->where('email', $email);
             $delete = $this->db->delete('user');
             if ($delete) {

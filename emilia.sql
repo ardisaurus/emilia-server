@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 10, 2018 at 10:59 AM
+-- Generation Time: May 11, 2018 at 03:01 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 5.6.33
 
@@ -41,9 +41,9 @@ CREATE TABLE `device` (
 --
 
 INSERT INTO `device` (`dvc_id`, `dvc_name`, `dvc_password`, `dvc_password_sc`, `dvc_status`) VALUES
-('bk803', '', 'c93ccd78b2076528346216b3b2f701e6', '0192023a7bbd73250516f069df18b500', 0),
+('bk803', '', 'c93ccd78b2076528346216b3b2f701e6', '', 0),
 ('go956', '', '0192023a7bbd73250516f069df18b500', '', 0),
-('ue025', 'Front door', '0192023a7bbd73250516f069df18b500', '', 0);
+('ue025', '', '0192023a7bbd73250516f069df18b500', '', 1);
 
 -- --------------------------------------------------------
 
@@ -58,21 +58,6 @@ CREATE TABLE `history` (
   `hst_dvc_id` varchar(60) NOT NULL,
   `hst_email` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `history`
---
-
-INSERT INTO `history` (`hst_id`, `hst_date`, `hst_time`, `hst_dvc_id`, `hst_email`) VALUES
-(3, '2018-04-05', '06:00:00', 'bk803', 'onodera@haru.com'),
-(4, '2018-04-07', '05:53:18', 'ue025', 'onodera@haru.com'),
-(5, '2018-04-08', '05:22:55', 'ue025', 'onodera@haru.com'),
-(6, '2018-04-08', '05:41:35', 'ue025', 'onodera@haru.com'),
-(7, '2018-04-09', '09:00:11', 'bk803', 'ichijo@raku.com'),
-(8, '2018-04-09', '04:38:31', 'bk803', 'ichijo@raku.com'),
-(9, '2018-04-09', '04:39:51', 'bk803', 'ichijo@raku.com'),
-(10, '2018-04-09', '04:40:51', 'bk803', 'ichijo@raku.com'),
-(11, '2018-04-09', '04:48:22', 'bk803', 'onodera@haru.com');
 
 -- --------------------------------------------------------
 
@@ -92,9 +77,18 @@ CREATE TABLE `ownership` (
 --
 
 INSERT INTO `ownership` (`own_id`, `own_email`, `own_dvc_id`, `own_level`) VALUES
-(5, 'onodera@haru.com', 'ue025', 0),
-(7, 'onodera@haru.com', 'bk803', 0),
-(11, 'onodera@haru.com', 'bk803', 1);
+(2, 'onodera@haru.com', 'bk803', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `token_email`
+--
+
+CREATE TABLE `token_email` (
+  `email` varchar(100) NOT NULL,
+  `token` varchar(12) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -116,8 +110,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`email`, `name`, `password`, `dob`, `level`, `active`) VALUES
-('ichijo@raku.com', 'Ichojo Raku', '0192023a7bbd73250516f069df18b500', '1995-01-01', 0, 1),
-('onodera@haru.com', 'Onodera Haru', '0192023a7bbd73250516f069df18b500', '2003-12-20', 0, 1),
+('onodera@haru.com', 'Onoderan Haru', '0192023a7bbd73250516f069df18b500', '1996-11-19', 0, 1),
 ('onodera@kosaki.com', 'Onoderan Kosaki', '0192023a7bbd73250516f069df18b500', '1996-11-19', 1, 1);
 
 --
@@ -143,6 +136,12 @@ ALTER TABLE `ownership`
   ADD PRIMARY KEY (`own_id`);
 
 --
+-- Indexes for table `token_email`
+--
+ALTER TABLE `token_email`
+  ADD PRIMARY KEY (`email`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -156,13 +155,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `hst_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `hst_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ownership`
 --
 ALTER TABLE `ownership`
-  MODIFY `own_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `own_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

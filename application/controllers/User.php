@@ -27,7 +27,7 @@ class User extends REST_Controller {
             $this->db->where('email', $email);
             $user = $this->db->get('user')->result();
         }
-        $this->response($user, 200);
+        $this->response(array("result"=>$user, 200));
     }
 
     function index_post() {
@@ -47,7 +47,7 @@ class User extends REST_Controller {
                     'dob'       => $this->post('dob'));
                 $insert = $this->db->insert('user', $data);
                 if ($insert) {
-                    $this->response($data, 200);
+                    $this->response(array("result"=>$data, 200));
                 } else {
                     $this->response(array('status' => 'fail', 502));
                 }    
@@ -63,10 +63,10 @@ class User extends REST_Controller {
             $user = $this->db->get('user')->result();
             if ($user[0]->password==$password ) {
                 $data[0] = array('status' => "success");
-                $this->response($data, 200);
+                $this->response(array("result"=>$data, 200));
             } else {
                 $data[0] = array('status' => "fail");
-                $this->response($data, 200);
+                $this->response(array("result"=>$data, 200));
             }  
         }elseif ($action=="delete") {
 
@@ -120,7 +120,7 @@ class User extends REST_Controller {
             $this->db->where('email', $email);
             $update = $this->db->update('user', $data);
             if ($update) {
-                $this->response($data, 200);
+                $this->response(array("result"=>$data, 200));
             } else {
                 $this->response(array('status' => 'fail', 502));
             }

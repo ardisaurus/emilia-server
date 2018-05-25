@@ -34,7 +34,7 @@ class Memberdeviceman extends REST_Controller {
                     $device = $this->db->query("SELECT `dvc_id`,`dvc_status`,`dvc_name`,`ownership`.`own_email` as `email` FROM `device` inner JOIN `ownership` ON `device`.`dvc_id`=`ownership`.`own_dvc_id` WHERE `device`.`dvc_id`='$dvc_id' AND `ownership`.`own_email`= '$own_email' AND `ownership`.`own_level`=0")->result();
                 }
             }            
-            $this->response($device, 200);
+            $this->response(array("result"=>$device, 200));
         } else {
             $this->response(array('status' => 'fail', 502));
         }
@@ -59,7 +59,7 @@ class Memberdeviceman extends REST_Controller {
                 }else{
                    $insert = $this->db->insert('ownership', $data);
                     if ($insert) {
-                        $this->response($data, 200);
+                        $this->response(array("result"=>$data, 200));
                     } else {
                         $this->response(array('status' => 'fail', 502));
                     }
@@ -79,7 +79,7 @@ class Memberdeviceman extends REST_Controller {
             if ($cekdvc) {                
                 $insert = $this->db->insert('ownership', $data);
                 if ($insert) {
-                    $this->response($data, 200);
+                    $this->response(array("result"=>$data, 200));
                 } else {
                     $this->response(array('status' => 'fail', 502));
                 }
@@ -94,7 +94,7 @@ class Memberdeviceman extends REST_Controller {
             $this->db->where('dvc_id', $this->post('dvc_id'));
             $update = $this->db->update('device', $data);
             if ($update) {
-                $this->response($data, 200);
+                $this->response(array("result"=>$data, 200));
             } else {
                 $this->response(array('status' => 'fail', 502));
             }
@@ -108,10 +108,10 @@ class Memberdeviceman extends REST_Controller {
             $device = $this->db->get('device')->result();
             if ($device[0]->dvc_password==$dvc_password ) {
                 $data[0] = array('status' => "success");
-                $this->response($data, 200);
+                $this->response(array("result"=>$data, 200));
             } else {
                 $data[0] = array('status' => "fail");
-                $this->response($data, 200);
+                $this->response(array("result"=>$data, 200));
             }
         }elseif ($action=="forgot_password") {
             // forgot device password with primary access password
@@ -131,14 +131,14 @@ class Memberdeviceman extends REST_Controller {
                 $update = $this->db->update('device', $data);
                 if ($update) {
                     $data[0] = array('status' => "success");
-                    $this->response($data, 200);
+                    $this->response(array("result"=>$data, 200));
                 } else {
                     $data[0] = array('status' => "fail");
-                    $this->response($data, 200);
+                    $this->response(array("result"=>$data, 200));
                 }
             } else {
                 $data[0] = array('status' => $user[0]->password."nm");
-                $this->response($data, 200);
+                $this->response(array("result"=>$data, 200));
             }
         }elseif ($action=="auth_sc") {
             // Authorize user with secondary access password
@@ -150,10 +150,10 @@ class Memberdeviceman extends REST_Controller {
             $device = $this->db->get('device')->result();
             if ($device[0]->dvc_password_sc==$dvc_password ) {
                 $data[0] = array('status' => "success");
-                $this->response($data, 200);
+                $this->response(array("result"=>$data, 200));
             } else {
                 $data[0] = array('status' => "fail");
-                $this->response($data, 200);
+                $this->response(array("result"=>$data, 200));
             }
         }elseif ($action=="sc_check") {
             // Check secondary access enable/disable
@@ -162,10 +162,10 @@ class Memberdeviceman extends REST_Controller {
             $device = $this->db->get('device')->result();
             if ($device[0]->dvc_password_sc!='') {
                 $data[0] = array('status' => "success");
-                $this->response($data, 200);
+                $this->response(array("result"=>$data, 200));
             } else {
                 $data[0] = array('status' => "fail");
-                $this->response($data, 200);
+                $this->response(array("result"=>$data, 200));
             }
         }elseif ($action=="id_check") {
             //check device without owner
@@ -173,10 +173,10 @@ class Memberdeviceman extends REST_Controller {
             $device = $this->db->query("SELECT `dvc_id`,`dvc_status` FROM `device` LEFT JOIN `ownership` ON `device`.`dvc_id`=`ownership`.`own_dvc_id` where `ownership`.`own_dvc_id` is null AND `device`.`dvc_id`='$dvc_id'")->result();
             if ($device) {
                 $data[0] = array('status' => "success");
-                $this->response($data, 200);
+                $this->response(array("result"=>$data, 200));
             } else {
                 $data[0] = array('status' => "fail");
-                $this->response($data, 200);
+                $this->response(array("result"=>$data, 200));
             }
         }elseif ($action=="id_check_sc") {
             //check device with owner
@@ -184,10 +184,10 @@ class Memberdeviceman extends REST_Controller {
             $device = $this->db->query("SELECT `dvc_id`,`dvc_status` FROM `device` LEFT JOIN `ownership` ON `device`.`dvc_id`=`ownership`.`own_dvc_id` where `ownership`.`own_dvc_id` is not null AND `device`.`dvc_id`='$dvc_id' AND `device`.`dvc_password_sc`!=''")->result();
             if ($device) {
                 $data[0] = array('status' => "success");
-                $this->response($data, 200);
+                $this->response(array("result"=>$data, 200));
             } else {
                 $data[0] = array('status' => "fail");
-                $this->response($data, 200);
+                $this->response(array("result"=>$data, 200));
             }
         }elseif ($action=="unlock") {
             //unlock with primary access password
@@ -210,7 +210,7 @@ class Memberdeviceman extends REST_Controller {
                                         'hst_dvc_id' => $dvc_id);
                         $update2 = $this->db->insert('history', $data2);
                         if ($update2) {
-                            $this->response($data2, 200);
+                            $this->response(array("result"=>$data2, 200));
                         } else {
                             $this->response(array('status' => 'fail', 502));
                         }
@@ -222,7 +222,7 @@ class Memberdeviceman extends REST_Controller {
                     $this->db->where('dvc_id', $dvc_id);
                     $update = $this->db->update('device', $data);
                     if ($update) {
-                        $this->response($data, 200);
+                        $this->response(array("result"=>$data, 200));
                     } else {
                         $this->response(array('status' => 'fail', 502));
                     }
@@ -232,7 +232,7 @@ class Memberdeviceman extends REST_Controller {
                 $this->db->where('dvc_id', $dvc_id);
                 $update = $this->db->update('device', $data);
                 if ($update) {
-                    $this->response($data, 200);
+                    $this->response(array("result"=>$data, 200));
                 } else {
                     $this->response(array('status' => 'fail', 502));
                 }
@@ -258,7 +258,7 @@ class Memberdeviceman extends REST_Controller {
                                         'hst_dvc_id' => $dvc_id);
                         $update2 = $this->db->insert('history', $data2);
                         if ($update2) {
-                            $this->response($data2, 200);
+                            $this->response(array("result"=>$data2, 200));
                         } else {
                             $this->response(array('status' => 'fail', 502));
                         }
@@ -270,7 +270,7 @@ class Memberdeviceman extends REST_Controller {
                     $this->db->where('dvc_id', $dvc_id);
                     $update = $this->db->update('device', $data);
                     if ($update) {
-                        $this->response($data, 200);
+                        $this->response(array("result"=>$data, 200));
                     } else {
                         $this->response(array('status' => 'fail', 502));
                     }
@@ -280,7 +280,7 @@ class Memberdeviceman extends REST_Controller {
                 $this->db->where('dvc_id', $dvc_id);
                 $update = $this->db->update('device', $data);
                 if ($update) {
-                    $this->response($data, 200);
+                    $this->response(array("result"=>$data, 200));
                 } else {
                     $this->response(array('status' => 'fail', 502));
                 }
@@ -299,7 +299,7 @@ class Memberdeviceman extends REST_Controller {
             $this->db->where('dvc_id', $dvc_id);
             $update = $this->db->update('device', $data);
             if ($update) {
-                $this->response($data, 200);
+                $this->response(array("result"=>$data, 200));
             } else {
                 $this->response(array('status' => 'fail', 502));
             }
@@ -320,14 +320,14 @@ class Memberdeviceman extends REST_Controller {
                 $update = $this->db->update('device', $data);
                 if ($update) {
                     $data[0] = array('status' => "success");
-                    $this->response($data, 200);
+                    $this->response(array("result"=>$data, 200));
                 } else {
                     $data[0] = array('status' => "fail");
-                    $this->response($data, 200);
+                    $this->response(array("result"=>$data, 200));
                 }
             } else {
                 $data[0] = array('status' => "fail");
-                $this->response($data, 200);
+                $this->response(array("result"=>$data, 200));
             }
         }elseif ($action=="delete_sc") {
             //delete device from owned device list secondary access
@@ -339,10 +339,10 @@ class Memberdeviceman extends REST_Controller {
             $delete = $this->db->delete('ownership');
             if ($delete) {
                 $data[0] = array('status' => "success");
-                $this->response($data, 200);
+                $this->response(array("result"=>$data, 200));
             } else {
                 $data[0] = array('status' => "fail");
-                $this->response($data, 200);
+                $this->response(array("result"=>$data, 200));
             }
         }elseif ($action=="delete_sc_key") {
             //delete secondary access key/password
@@ -358,10 +358,10 @@ class Memberdeviceman extends REST_Controller {
             $update = $this->db->update('device', $data);
             if ($update) {
                 $data[0] = array('status' => "success");
-                $this->response($data, 200);
+                $this->response(array("result"=>$data, 200));
             } else {
                 $data[0] = array('status' => "fail");
-                $this->response($data, 200);
+                $this->response(array("result"=>$data, 200));
             }
         }else{
             $this->response(array('status' => 'fail', 502));

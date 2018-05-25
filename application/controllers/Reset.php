@@ -82,10 +82,10 @@ class Reset extends REST_Controller {
     $this->email->message($message);  
     if (!$this->email->send()) {  
       $data[0] = array('status' => "fail");
-      $this->response($data, 502); 
+      $this->response(array("result"=>$data, 200)); 
     }else{  
       $data[0] = array('status' => "success");
-      $this->response($data, 200);
+      $this->response(array("result"=>$data, 200));
     }  
   }
   

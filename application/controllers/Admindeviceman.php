@@ -27,7 +27,7 @@ class Admindeviceman extends REST_Controller {
                 $device = $this->db->query("SELECT `dvc_id`,`dvc_status`,`ownership`.`own_email` as `email`, `user`.`name` as `name` FROM `device` inner JOIN `ownership` ON `device`.`dvc_id`=`ownership`.`own_dvc_id` inner JOIN `user` on `ownership`.`own_email`=`user`.`email` WHERE `device`.`dvc_id`='$dvc_id'")->result();
             }
         }
-        $this->response($device, 200);
+        $this->response(array("result"=>$device, 200));
     }
 
     function index_post() {
@@ -38,7 +38,7 @@ class Admindeviceman extends REST_Controller {
                     'dvc_password'  => $this->post('dvc_password'));
             $insert = $this->db->insert('device', $data);
             if ($insert) {
-                $this->response($data, 200);
+                $this->response(array("result"=>$data, 200));
             } else {
                 $this->response(array('status' => 'fail', 502));
             }
@@ -49,7 +49,7 @@ class Admindeviceman extends REST_Controller {
             $this->db->where('dvc_id', $data['dvc_id']);
             $update = $this->db->update('device', $data);
             if ($update) {
-                $this->response($data, 200);
+                $this->response(array("result"=>$data, 200));
             } else {
                 $this->response(array('status' => 'fail', 502));
             }

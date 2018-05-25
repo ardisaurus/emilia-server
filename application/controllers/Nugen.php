@@ -17,7 +17,7 @@ class Nugen extends REST_Controller {
             $dvc_id=$this->gen_random(5);        
         }
         $data[0] = array('dvc_id' => $dvc_id);
-        $this->response($data, 200);
+        $this->response(array("result"=>$data, 200));
     }
 
     function index_post() {

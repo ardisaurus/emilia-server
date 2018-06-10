@@ -62,10 +62,10 @@ class User extends REST_Controller {
             $this->db->where('email', $email);
             $user = $this->db->get('user')->result();
             if ($user[0]->password==$password ) {
-                $data[0] = array('status' => "success");
+                $data = array('status' => "success");
                 $this->response(array("result"=>$data, 200));
             } else {
-                $data[0] = array('status' => "fail");
+                $data = array('status' => "fail");
                 $this->response(array("result"=>$data, 200));
             }  
         }elseif ($action=="delete") {

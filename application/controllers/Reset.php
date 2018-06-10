@@ -33,15 +33,15 @@ class Reset extends REST_Controller {
                     $message='Silahkan login kembali dengan email : '.$email.' dan kata sandi : '.$password;
                     $this->send($email, $subject, $message);
                 } else {
-                    $data[0] = array('status' => "fail");
+                    $data = array('status' => "fail");
                     $this->response($data, 502);
                 }
             } else { 
-                $data[0] = array('status' => "fail");
+                $data = array('status' => "fail");
                 $this->response($data, 502);
             }
         }else{ 
-            $data[0] = array('status' => "fail");
+            $data = array('status' => "fail");
             $this->response($data, 502);
         }
     }
@@ -81,10 +81,10 @@ class Reset extends REST_Controller {
     $this->email->subject($subject);   
     $this->email->message($message);  
     if (!$this->email->send()) {  
-      $data[0] = array('status' => "fail");
+      $data = array('status' => "fail");
       $this->response(array("result"=>$data, 200)); 
     }else{  
-      $data[0] = array('status' => "success");
+      $data = array('status' => "success");
       $this->response(array("result"=>$data, 200));
     }  
   }

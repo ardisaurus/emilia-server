@@ -16,7 +16,7 @@ class Nugen extends REST_Controller {
         while ($this->id_check($dvc_id)==true) {
             $dvc_id=$this->gen_random(5);        
         }
-        $data = array('dvc_id' => $dvc_id);
+        $data[0] = array('dvc_id' => $dvc_id);
         $this->response(array("result"=>$data, 200));
     }
 

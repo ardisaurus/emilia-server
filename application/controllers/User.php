@@ -120,6 +120,14 @@ class User extends REST_Controller {
             $this->db->where('email', $email);
             $update = $this->db->update('user', $data);
             if ($update) {
+                if ($part=="email") {
+                    $data2 = array('own_email' => $this->post('new_email'));
+                    $this->db->where('own_email', $email);
+                    $update = $this->db->update('ownership', $data2);
+                    $data2 = array('hst_email' => $this->post('new_email'));
+                    $this->db->where('hst_email', $email);
+                    $update = $this->db->update('history', $data2);
+                }
                 $this->response(array("result"=>$data, 200));
             } else {
                 $this->response(array('status' => 'fail', 502));

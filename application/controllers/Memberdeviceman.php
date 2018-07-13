@@ -206,7 +206,7 @@ class Memberdeviceman extends REST_Controller {
                     if ($update) {
                         $data2 = array( 'hst_email' => $email,
                                         'hst_date' => date("Y-m-d"),
-                                        'hst_time' => date("h:i:s"),
+                                        'hst_time' => date("H:i:s"),
                                         'hst_dvc_id' => $dvc_id);
                         $update2 = $this->db->insert('history', $data2);
                         if ($update2) {
@@ -254,7 +254,7 @@ class Memberdeviceman extends REST_Controller {
                     if ($update) {
                         $data2 = array( 'hst_email' => $email,
                                         'hst_date' => date("Y-m-d"),
-                                        'hst_time' => date("h:i:s"),
+                                        'hst_time' => date("H:i:s"),
                                         'hst_dvc_id' => $dvc_id);
                         $update2 = $this->db->insert('history', $data2);
                         if ($update2) {

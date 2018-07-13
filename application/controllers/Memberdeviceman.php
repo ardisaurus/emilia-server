@@ -284,7 +284,36 @@ class Memberdeviceman extends REST_Controller {
                 } else {
                     $this->response(array('status' => 'fail', 502));
                 }
-            }               
+            }
+        }elseif ($action=="lock") {
+            //lock device
+            $email = $this->post('email');
+            $dvc_id = $this->post('dvc_id');
+            $this->db->select('dvc_id');
+            $this->db->where('dvc_id', $dvc_id);
+            $device = $this->db->get('device')->result();
+            if ($device[0]->dvc_id==$dvc_id ) {
+                $data = array('dvc_status' => 0);
+                $this->db->where('dvc_id', $dvc_id);
+                $update = $this->db->update('device', $data);
+                if ($update) {
+                    $data2 = array( 'hst_email' => $email,
+                                    'hst_date' => date("Y-m-d"),
+                                    'hst_time' => date("H:i:s"),
+                                    'hst_status' => 0,
+                                    'hst_dvc_id' => $dvc_id);
+                    $update2 = $this->db->insert('history', $data2);
+                    if ($update2) {
+                        $this->response(array("result"=>$data2, 200));
+                    } else {
+                        $this->response(array('status' => 'fail', 502));
+                    }
+                } else {
+                    $this->response(array('status' => 'fail', 502));
+                }
+            }else{
+                $this->response(array('status' => 'fail', 502));
+            }             
         }elseif ($action=="update") {
             //update device detail
             $dvc_id = $this->post('dvc_id');

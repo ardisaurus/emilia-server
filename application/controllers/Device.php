@@ -18,6 +18,7 @@ class Device extends REST_Controller {
         } else {
             $device = $this->db->query("SELECT `dvc_status` FROM `device` where `device`.`dvc_id`='$dvc_id'")->result();
             $this->response(array("result"=>$device, 200));
+            // $this->response($device, 200);
         }  
     }
 

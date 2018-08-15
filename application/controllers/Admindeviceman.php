@@ -35,7 +35,7 @@ class Admindeviceman extends REST_Controller {
         if ($action=="insert") {
             $data = array(
                     'dvc_id'      => $this->post('dvc_id'),
-                    'dvc_password'  => $this->post('dvc_password'));
+                    'dvc_password'  => md5($this->post('dvc_password')));
             $insert = $this->db->insert('device', $data);
             if ($insert) {
                 $this->response(array("result"=>$data, 200));

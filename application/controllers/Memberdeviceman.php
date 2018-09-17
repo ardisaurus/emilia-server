@@ -142,6 +142,21 @@ class Memberdeviceman extends REST_Controller {
                 $data = array('status' => "fail");
                 $this->response(array("result"=>$data, 200));
             }
+        }elseif ($action=="auth_unencripted") {
+            // Authorize user with primary access password unencripted
+            $dvc_id = $this->post('dvc_id');
+            $dvc_password=md5($this->post('dvc_password'));
+            $this->db->select('dvc_id');
+            $this->db->select('dvc_password');
+            $this->db->where('dvc_id', $dvc_id);
+            $device = $this->db->get('device')->result();
+            if ($device[0]->dvc_password==$dvc_password ) {
+                $data = array('status' => "success");
+                $this->response(array("result"=>$data, 200));
+            } else {
+                $data = array('status' => "fail");
+                $this->response(array("result"=>$data, 200));
+            }
         }elseif ($action=="auth_sc") {
             // Authorize user with secondary access password
             $dvc_id = $this->post('dvc_id');
@@ -149,6 +164,21 @@ class Memberdeviceman extends REST_Controller {
             $cipher_rsa = $this->post('cipher_rsa');
             $cipher_aes = $this->post('cipher_aes');
             $dvc_password=md5($this->dec($session_id, $cipher_rsa, $cipher_aes));
+            $this->db->select('dvc_id');
+            $this->db->select('dvc_password_sc');
+            $this->db->where('dvc_id', $dvc_id);
+            $device = $this->db->get('device')->result();
+            if ($device[0]->dvc_password_sc==$dvc_password ) {
+                $data = array('status' => "success");
+                $this->response(array("result"=>$data, 200));
+            } else {
+                $data = array('status' => "fail");
+                $this->response(array("result"=>$data, 200));
+            }
+        }elseif ($action=="auth_sc_unencripted") {
+            // Authorize user with secondary access password
+            $dvc_id = $this->post('dvc_id');
+            $dvc_password=md5($this->post('dvc_password'));
             $this->db->select('dvc_id');
             $this->db->select('dvc_password_sc');
             $this->db->where('dvc_id', $dvc_id);

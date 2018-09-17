@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 15, 2018 at 03:00 PM
+-- Generation Time: Sep 17, 2018 at 08:08 AM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 5.6.36
 
@@ -41,7 +41,7 @@ CREATE TABLE `device` (
 --
 
 INSERT INTO `device` (`dvc_id`, `dvc_name`, `dvc_password`, `dvc_password_sc`, `dvc_status`) VALUES
-('bk803', '', 'abeac07d3c28c1bef9e730002c753ed4', '0192023a7bbd73250516f069df18b500', 1),
+('bk803', 'Pintu Depan', 'abeac07d3c28c1bef9e730002c753ed4', 'abeac07d3c28c1bef9e730002c753ed4', 0),
 ('go956', '', 'abeac07d3c28c1bef9e730002c753ed4', '', 0),
 ('ue025', '', 'abeac07d3c28c1bef9e730002c753ed4', '', 0);
 
@@ -100,8 +100,47 @@ INSERT INTO `history` (`hst_id`, `hst_date`, `hst_time`, `hst_dvc_id`, `hst_emai
 (33, '2018-08-14', '22:44:02', 'bk803', 'onodera@haru.com', 0),
 (34, '2018-08-14', '22:44:02', 'bk803', 'onodera@haru.com', 0),
 (35, '2018-08-15', '08:59:39', 'bk803', 'onodera@haru.com', 1),
-(40, '2018-08-15', '19:58:29', 'ue025', 'onodera@haru.com', 1),
-(41, '2018-08-15', '19:58:35', 'ue025', 'onodera@haru.com', 0);
+(42, '2018-08-19', '14:03:39', 'bk803', 'onodera@haru.com', 0),
+(43, '2018-08-19', '14:03:55', 'bk803', 'onodera@haru.com', 1),
+(44, '2018-08-19', '14:03:58', 'bk803', 'onodera@haru.com', 0),
+(45, '2018-08-19', '14:46:39', 'bk803', 'onodera@haru.com', 1),
+(46, '2018-08-19', '14:46:43', 'bk803', 'onodera@haru.com', 0),
+(47, '2018-08-19', '14:46:58', 'bk803', 'onodera@haru.com', 1),
+(48, '2018-08-19', '14:47:02', 'bk803', 'onodera@haru.com', 0),
+(49, '2018-08-27', '11:46:02', 'bk803', 'onodera@haru.com', 1),
+(50, '2018-08-27', '11:46:27', 'bk803', 'onodera@haru.com', 0),
+(51, '2018-08-27', '11:52:28', 'bk803', 'onodera@haru.com', 1),
+(52, '2018-08-27', '11:52:59', 'bk803', 'onodera@haru.com', 0),
+(53, '2018-08-27', '11:56:08', 'bk803', 'onodera@haru.com', 1),
+(54, '2018-08-28', '10:09:48', 'bk803', 'onodera@haru.com', 0),
+(55, '2018-09-01', '17:10:30', 'bk803', 'onodera@haru.com', 1),
+(56, '2018-09-01', '17:10:35', 'bk803', 'onodera@haru.com', 0),
+(57, '2018-09-01', '17:12:18', 'bk803', 'onodera@haru.com', 1),
+(58, '2018-09-02', '22:14:22', 'bk803', 'onodera@haru.com', 0),
+(59, '2018-09-02', '22:14:37', 'bk803', 'onodera@haru.com', 1),
+(60, '2018-09-02', '22:16:34', 'bk803', 'onodera@haru.com', 0),
+(61, '2018-09-03', '11:25:05', 'bk803', 'onodera@haru.com', 1),
+(62, '2018-09-13', '11:20:40', 'bk803', 'onodera@haru.com', 0),
+(63, '2018-09-13', '11:23:43', 'bk803', 'onodera@haru.com', 1),
+(64, '2018-09-17', '12:19:29', 'bk803', 'onodera@haru.com', 0),
+(65, '2018-09-17', '12:19:45', 'bk803', 'onodera@haru.com', 1),
+(66, '2018-09-17', '12:19:59', 'bk803', 'onodera@haru.com', 0),
+(67, '2018-09-17', '12:20:09', 'bk803', 'onodera@haru.com', 1),
+(68, '2018-09-17', '12:20:17', 'bk803', 'onodera@haru.com', 0),
+(69, '2018-09-17', '12:22:13', 'bk803', 'onodera@haru.com', 1),
+(70, '2018-09-17', '12:22:40', 'bk803', 'onodera@haru.com', 0),
+(71, '2018-09-17', '12:23:47', 'bk803', 'onodera@haru.com', 1),
+(72, '2018-09-17', '12:24:01', 'bk803', 'onodera@haru.com', 0),
+(73, '2018-09-17', '12:59:37', 'bk803', 'onodera@nanako.com', 1),
+(74, '2018-09-17', '12:59:40', 'bk803', 'onodera@nanako.com', 0),
+(75, '2018-09-17', '13:03:32', 'bk803', 'onodera@nanako.com', 1),
+(76, '2018-09-17', '13:03:37', 'bk803', 'onodera@nanako.com', 0),
+(77, '2018-09-17', '13:03:50', 'bk803', 'onodera@nanako.com', 1),
+(78, '2018-09-17', '13:03:54', 'bk803', 'onodera@nanako.com', 0),
+(79, '2018-09-17', '13:05:57', 'bk803', 'onodera@nanako.com', 1),
+(80, '2018-09-17', '13:06:06', 'bk803', 'onodera@nanako.com', 0),
+(81, '2018-09-17', '13:06:43', 'bk803', 'onodera@nanako.com', 1),
+(82, '2018-09-17', '13:06:58', 'bk803', 'onodera@nanako.com', 0);
 
 -- --------------------------------------------------------
 
@@ -123,8 +162,7 @@ CREATE TABLE `ownership` (
 INSERT INTO `ownership` (`own_id`, `own_email`, `own_dvc_id`, `own_level`) VALUES
 (2, 'onodera@haru.com', 'bk803', 0),
 (4, 'onodera@haru.com', 'go956', 0),
-(5, 'onodera@nanako.com', 'bk803', 1),
-(12, 'onodera@haru.com', 'ue025', 0);
+(5, 'onodera@nanako.com', 'bk803', 1);
 
 -- --------------------------------------------------------
 
@@ -139,6 +177,13 @@ CREATE TABLE `session` (
   `modulo` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `session`
+--
+
+INSERT INTO `session` (`session_id`, `public_key`, `private_key`, `modulo`) VALUES
+('fn6nk8mc7', '6263', '19151367', '42158173');
+
 -- --------------------------------------------------------
 
 --
@@ -149,6 +194,13 @@ CREATE TABLE `token_email` (
   `email` varchar(100) NOT NULL,
   `token` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `token_email`
+--
+
+INSERT INTO `token_email` (`email`, `token`) VALUES
+('yologami@gmail.com', 'vtev6bxdjm8d');
 
 -- --------------------------------------------------------
 
@@ -170,9 +222,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`email`, `name`, `password`, `dob`, `level`, `active`) VALUES
-('onodera@haru.com', 'Onoderan Haru', '0192023a7bbd73250516f069df18b500', '1996-11-19', 0, 1),
+('onodera@haru.com', 'Onodera Haruka', '0192023a7bbd73250516f069df18b500', '1996-11-19', 0, 1),
 ('onodera@kosaki.com', 'Onoderan Kosaki', '0192023a7bbd73250516f069df18b500', '1996-11-19', 1, 1),
-('onodera@nanako.com', 'Onoderan Haru', '0192023a7bbd73250516f069df18b500', '1996-11-19', 0, 1);
+('onodera@nanako.com', 'Onoderan Haru', '0192023a7bbd73250516f069df18b500', '1996-11-19', 0, 1),
+('yologami@gmail.com', 'Yologami Natsu', '0192023a7bbd73250516f069df18b500', '1993-08-28', 1, 0);
 
 --
 -- Indexes for dumped tables
@@ -222,13 +275,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `hst_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `hst_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `ownership`
 --
 ALTER TABLE `ownership`
-  MODIFY `own_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `own_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

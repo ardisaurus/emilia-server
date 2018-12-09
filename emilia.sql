@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 17, 2018 at 08:08 AM
--- Server version: 10.1.32-MariaDB
--- PHP Version: 5.6.36
+-- Generation Time: Nov 08, 2018 at 04:07 PM
+-- Server version: 10.1.30-MariaDB
+-- PHP Version: 5.6.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -33,6 +33,7 @@ CREATE TABLE `device` (
   `dvc_name` varchar(100) NOT NULL,
   `dvc_password` text NOT NULL,
   `dvc_password_sc` text NOT NULL,
+  `dvc_encription` varchar(4) NOT NULL DEFAULT 'aes1',
   `dvc_status` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -40,10 +41,10 @@ CREATE TABLE `device` (
 -- Dumping data for table `device`
 --
 
-INSERT INTO `device` (`dvc_id`, `dvc_name`, `dvc_password`, `dvc_password_sc`, `dvc_status`) VALUES
-('bk803', 'Pintu Depan', 'abeac07d3c28c1bef9e730002c753ed4', 'abeac07d3c28c1bef9e730002c753ed4', 0),
-('go956', '', 'abeac07d3c28c1bef9e730002c753ed4', '', 0),
-('ue025', '', 'abeac07d3c28c1bef9e730002c753ed4', '', 0);
+INSERT INTO `device` (`dvc_id`, `dvc_name`, `dvc_password`, `dvc_password_sc`, `dvc_encription`, `dvc_status`) VALUES
+('bk803', 'Pintu Depan', 'abeac07d3c28c1bef9e730002c753ed4', 'abeac07d3c28c1bef9e730002c753ed4', 'aes1', 1),
+('go956', '', 'abeac07d3c28c1bef9e730002c753ed4', '', 'aes1', 0),
+('ue025', '', 'abeac07d3c28c1bef9e730002c753ed4', '', 'aes1', 0);
 
 -- --------------------------------------------------------
 
@@ -140,7 +141,9 @@ INSERT INTO `history` (`hst_id`, `hst_date`, `hst_time`, `hst_dvc_id`, `hst_emai
 (79, '2018-09-17', '13:05:57', 'bk803', 'onodera@nanako.com', 1),
 (80, '2018-09-17', '13:06:06', 'bk803', 'onodera@nanako.com', 0),
 (81, '2018-09-17', '13:06:43', 'bk803', 'onodera@nanako.com', 1),
-(82, '2018-09-17', '13:06:58', 'bk803', 'onodera@nanako.com', 0);
+(82, '2018-09-17', '13:06:58', 'bk803', 'onodera@nanako.com', 0),
+(83, '2018-11-08', '21:29:06', 'bk803', 'onodera@haru.com', 0),
+(84, '2018-11-08', '21:30:03', 'bk803', 'onodera@haru.com', 1);
 
 -- --------------------------------------------------------
 
@@ -182,7 +185,9 @@ CREATE TABLE `session` (
 --
 
 INSERT INTO `session` (`session_id`, `public_key`, `private_key`, `modulo`) VALUES
-('fn6nk8mc7', '6263', '19151367', '42158173');
+('3lhvg37td', '6673', '41936881', '54843623'),
+('fn6nk8mc7', '6263', '19151367', '42158173'),
+('qqeamr5vo', '6883', '6273355', '67274381');
 
 -- --------------------------------------------------------
 
@@ -275,7 +280,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `hst_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `hst_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `ownership`
